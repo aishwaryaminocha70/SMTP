@@ -1,6 +1,5 @@
 from socket import *
 def smtp_client(port=1025, mailserver='127.0.0.1'):
-   
    msg = "\r\n My message"
    endmsg = "\r\n.\r\n"
    mailserver = 'smtp.gmail.com'
@@ -28,7 +27,6 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
    if recv1[:3] != '250':
                #print('250 reply not received from server.')
    # Fill in end
-
    # Send RCPT TO command and print server response.
    # Fill in start
       rcptTo = "RCPT TO: <xyx@gmail.com> \r\n"
@@ -38,7 +36,6 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
    if recv1[:3] != '250':
                #print('250 reply not received from server.')
       # Fill in end
-
    # Send DATA command and print server response.
    # Fill in start
       data = "DATA\r\n"
@@ -47,17 +44,14 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
    if recv1[:3] != '250':
                #print('250 reply not received from server.')
       # Fill in end
-
       # Send message data.
       # Fill in start
-      clientSocket.send('\r\n My message')
-         
+      clientSocket.send(msg.encode())
       # Fill in end
-
       # Message ends with a single period.
       # Fill in start
       endmsg ='\r\n.\r\n'
-      clientSocket.send(endmsg)
+      clientSocket.send(endmsg.encode())
    if recv1[:3] != '250':
                #print('250 reply not received from server.')
       # Fill in end
