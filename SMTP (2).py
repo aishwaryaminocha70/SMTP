@@ -1,5 +1,5 @@
 from socket import *
-def smtp_client(mailserver='127.0.0.1', port=1025,):
+def smtp_client(mailserver='127.0.0.1', port=1025):
    msg = "\r\n My message"
    endmsg = "\r\n.\r\n"
    #mailserver = 'smtp.gmail.com'
@@ -38,8 +38,8 @@ def smtp_client(mailserver='127.0.0.1', port=1025,):
       # Fill in start
       data = "DATA\r\n"
       clientSocket.send(data.encode())
-      recv3 = clientSocket.recv(1024).decode
-   if recv3[:3] != '250':
+      recv4 = clientSocket.recv(1024).decode
+   if recv4[:3] != '250':
       # Fill in end
       # Send message data.
       # Fill in start
@@ -49,16 +49,16 @@ def smtp_client(mailserver='127.0.0.1', port=1025,):
       # Fill in start
       endmsg ='\r\n.\r\n'
       clientSocket.send(endmsg.encode())
-      recv4 = clientSocket.recv(1024).decode
-   if recv4[:3] != '250':
+      recv5 = clientSocket.recv(1024).decode
+   if recv5[:3] != '250':
       # Fill in end
       # Send QUIT command and get server response.
       # Fill in start
       clientSocket.send("QUIT\r\n".encode())
-      message=clientSocket.recv(1024).decode
+      msg=clientSocket.recv(1024).decode
       #print (message)
       clientSocket.close()
       # Fill in end
 if __name__ == '__main__':
-   smtp_client(mailserver='127.0.0.1', port=1025,)
+   smtp_client(mailserver='127.0.0.1', port=1025)
 
