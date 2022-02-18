@@ -6,7 +6,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
    # Create socket called clientSocket and establish a TCP connection with mailserver and port
    # Fill in start
    clientSocket = socket(AF_INET,SOCK_STREAM)
-   clientSocket.connect((mailserver, port))
+   clientSocket.connect(smtp_client(port=1025, mailserver='127.0.0.1'))
    # Fill in end
    recv = clientSocket.recv(1024).decode()
    if recv[:3] != '220':
@@ -17,7 +17,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
       recv1 = clientSocket.recv(1024).decode()
       #print(recv1)
    if recv1[:3] != '250':
-      print('250 reply not received from server.')
+      #print('250 reply not received from server.')
       #Send MAIL FROM command and print server response.
       #Fill in start
       mailFrom = "MAIL FROM: <bubbamcbubba99@gmail.com> \r\n"
@@ -31,7 +31,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
       rcptTo = "RCPT TO: <willmcwork@outlook.com> \r\n"
       clientSocket.send(rcptTo.encode())
       recv3 = clientSocket.recv(1024).decode
-      print("After RCPT TO command: "+recv3)
+      #print("After RCPT TO command: "+recv3)
    if recv3[:3] != '250':
       # Fill in end
       # Send DATA command and print server response.
@@ -60,4 +60,4 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
       clientSocket.close()
       # Fill in end
 if __name__ == '__main__':
-   smtp_client(1025, '127.0.0.1')
+   smtp_client(port=1025, mailserver='127.0.0.1')
