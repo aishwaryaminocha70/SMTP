@@ -1,12 +1,12 @@
 from socket import *
-def smtp_client(port=1025, mailserver='127.0.0.1'):
+def smtp_client(mailserver='127.0.0.1', port=1025,):
    msg = "\r\n My message"
    endmsg = "\r\n.\r\n"
    #mailserver = 'smtp.gmail.com'
    # Create socket called clientSocket and establish a TCP connection with mailserver and port
    # Fill in start
    clientSocket = socket(AF_INET,SOCK_STREAM)
-   clientSocket.connect(smtp_client(mailserver))
+   clientSocket.connect(mailserver, port)
    # Fill in end
    recv = clientSocket.recv(1024).decode()
    if recv[:3] != '220':
@@ -60,4 +60,5 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
       clientSocket.close()
       # Fill in end
 if __name__ == '__main__':
-   smtp_client(port=1025, mailserver='127.0.0.1')
+   smtp_client(mailserver='127.0.0.1', port=1025,)
+
