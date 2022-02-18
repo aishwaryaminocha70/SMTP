@@ -6,15 +6,15 @@ def smtp_client(mailserver='127.0.0.1', port=1025):
    # Create socket called clientSocket and establish a TCP connection with mailserver and port
    # Fill in start
    clientSocket = socket(AF_INET,SOCK_STREAM)
-   clientSocket.connect(mailserver, port)
+   clientSocket.connect((mailserver, port))
    # Fill in end
-   recv = clientSocket.recv(1024).decode()
+   recv = clientSocket.recv(1024)
    if recv[:3] != '220':
       #print('220 reply not received from server.')
       # Send HELO command and print server response.
       heloCommand = 'HELO Alice\r\n'
       clientSocket.send(heloCommand.encode())
-      recv1 = clientSocket.recv(1024).decode()
+      recv1 = clientSocket.recv(1024)
       #print(recv1)
    if recv1[:3] != '250':
       #print('250 reply not received from server.')
@@ -22,7 +22,7 @@ def smtp_client(mailserver='127.0.0.1', port=1025):
       #Fill in start
       mailFrom = "MAIL FROM: <bubbamcbubba99@gmail.com> \r\n"
       clientSocket.send(mailFrom.encode())
-      recv2 = clientSocket.recv(1024).decode
+      recv2 = clientSocket.recv(1024)
       #print("After MAIL FROM command: "+recv2)
    if recv2[:3] != '250':
       # Fill in end
@@ -30,7 +30,7 @@ def smtp_client(mailserver='127.0.0.1', port=1025):
       # Fill in start
       rcptTo = "RCPT TO: <willmcwork@outlook.com> \r\n"
       clientSocket.send(rcptTo.encode())
-      recv3 = clientSocket.recv(1024).decode
+      recv3 = clientSocket.recv(1024)
       #print("After RCPT TO command: "+recv3)
    if recv3[:3] != '250':
       # Fill in end
@@ -38,7 +38,7 @@ def smtp_client(mailserver='127.0.0.1', port=1025):
       # Fill in start
       data = "DATA\r\n"
       clientSocket.send(data.encode())
-      recv4 = clientSocket.recv(1024).decode
+      recv4 = clientSocket.recv(1024)
    if recv4[:3] != '250':
       # Fill in end
       # Send message data.
@@ -49,13 +49,13 @@ def smtp_client(mailserver='127.0.0.1', port=1025):
       # Fill in start
       endmsg ='\r\n.\r\n'
       clientSocket.send(endmsg.encode())
-      recv5 = clientSocket.recv(1024).decode
+      recv5 = clientSocket.recv(1024)
    if recv5[:3] != '250':
       # Fill in end
       # Send QUIT command and get server response.
       # Fill in start
       clientSocket.send("QUIT\r\n".encode())
-      msg=clientSocket.recv(1024).decode
+      msg=clientSocket.recv(1024)
       #print (message)
       clientSocket.close()
       # Fill in end
